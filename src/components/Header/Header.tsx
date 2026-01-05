@@ -34,7 +34,7 @@ const Header: React.FC = () => {
           before={
             <div className="logoContainer">
               <img src={gradospheraSvg} alt="TON Logo" className="logoImage" />
-              <Title weight="1" >ДАО Градосфера</Title>
+              <Title weight="1" >Домены</Title>
             </div>
           }
           after={
