@@ -5,7 +5,7 @@ import { Button, Caption, Cell, Modal, Placeholder, Title } from "@telegram-apps
 import { shortenAddress } from "@/utils/address";
 
 import "./style.css";
-import tonSvg from "./ton.svg";
+import gradospheraSvg from "./gradosphera.svg";
 import telegramGif from "./telegram.gif";
 
 const Header: React.FC = () => {
@@ -25,7 +25,7 @@ const Header: React.FC = () => {
     <>
       {isTestnet && (
         <div className="testnetBanner">
-          <Caption>Attention! This is a testnet version.</Caption>
+          <Caption>Внимание! Это тестовая версия.</Caption>
         </div>
       )}
       <div className="headerContainer">
@@ -33,8 +33,8 @@ const Header: React.FC = () => {
           style={{ margin: "10px 0" }}
           before={
             <div className="logoContainer">
-              <img src={tonSvg} alt="TON Logo" className="logoImage" />
-              <Title weight="1" >DNS</Title>
+              <img src={gradospheraSvg} alt="TON Logo" className="logoImage" />
+              <Title weight="1" >ДАО Градосфера</Title>
             </div>
           }
           after={
@@ -50,17 +50,17 @@ const Header: React.FC = () => {
                 }
                 onOpenChange={setIsModalOpen}
               >
-                <Placeholder description="Are you sure you want to disconnect?" header="Confirm Disconnect">
+                <Placeholder description="Вы уверены, что хотите отключиться?" header="Подтвердите отключение">
                   <img alt="Telegram sticker" src={telegramGif} className="modalImage" />
                 </Placeholder>
                 <Placeholder>
                   <Button mode="bezeled" onClick={handleDisconnect}>
-                    Yes, Disconnect
+                    Да, отключиться
                   </Button>
                 </Placeholder>
               </Modal>
             ) : (
-              <Button style={{ backgroundColor: "#2196F3" }} onClick={() => tonConnectUi.openModal()}>Connect Wallet</Button>
+              <Button style={{ backgroundColor: "#2196F3" }} onClick={() => tonConnectUi.openModal()}>Подключить кошелёк</Button>
             )
           }
         />

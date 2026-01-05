@@ -89,14 +89,14 @@ export const ManageDomainPage: FC = () => {
 
   const handleCheckResolverAddress = async () => {
     if (!resolverAddress) {
-      showSnackbar("Please enter a DNS Address!", "error");
+      showSnackbar("Введите DNS адрес!", "error");
       return;
     }
     const resolverAddressNew = Address.parse(resolverAddress).toString();
     setCheckingResolver(true);
     const dnsResult = await runGetMethod(resolverAddressNew, "dnsresolve", []);
     if (!dnsResult.success) {
-      showSnackbar("Incorrect DNS address!", "error");
+      showSnackbar("Неправильный DNS адрес!", "error");
       setIsVerified(false);
       setCheckingResolver(false);
       return;
@@ -124,7 +124,7 @@ export const ManageDomainPage: FC = () => {
 
   const handleSaveTonSite = async () => {
     try {
-      if (!resolverAddress) throw new Error("Error: DNS address is missing!");
+      if (!resolverAddress) throw new Error("Ошибка: отсутствует DNS адрес!");
       let payload;
       if (formData.tonSite) {
         const addr = new AdnlAddress(formData.tonSite);
@@ -134,7 +134,7 @@ export const ManageDomainPage: FC = () => {
       }
       await manager.sendTransaction(resolverAddress, payload);
       showSnackbar(
-        "Transaction confirmed by the wallet. Waiting for network confirmation.",
+        "Транзакция подтверждена кошельком. Ожидание подтверждения сетью.",
         "sent"
       );
     } catch (error: any) {
@@ -145,7 +145,7 @@ export const ManageDomainPage: FC = () => {
 
   const handleSaveTonStorage = async () => {
     try {
-      if (!resolverAddress) throw new Error("Error: DNS address is missing!");
+      if (!resolverAddress) throw new Error("Ошибка: отсутствует DNS адрес!");
       let payload;
       if (formData.tonStorage) {
         const bagId = new StorageBagId(formData.tonStorage);
@@ -155,7 +155,7 @@ export const ManageDomainPage: FC = () => {
       }
       await manager.sendTransaction(resolverAddress, payload);
       showSnackbar(
-        "Transaction confirmed by the wallet. Waiting for network confirmation.",
+        "Транзакция подтверждена кошельком. Ожидание подтверждения сетью.",
         "sent"
       );
     } catch (error: any) {
@@ -166,7 +166,7 @@ export const ManageDomainPage: FC = () => {
   const handleSaveWalletAddress = async () => {
     try {
       if (!resolverAddress) {
-        alert("Error: DNS address is missing!");
+        alert("Ошибка: отсутствует DNS адрес!");
         return;
       }
       const payload = formData.walletAddress
@@ -175,7 +175,7 @@ export const ManageDomainPage: FC = () => {
 
       await manager.sendTransaction(resolverAddress, payload);
       showSnackbar(
-        "Transaction confirmed by the wallet. Waiting for network confirmation.",
+        "Транзакция подтверждена кошельком. Ожидание подтверждения сетью.",
         "sent"
       );
     } catch (error: any) {
@@ -186,7 +186,7 @@ export const ManageDomainPage: FC = () => {
   const handleSaveSubdomains = async () => {
     try {
       if (!resolverAddress) {
-        alert("Error: DNS address is missing!");
+        alert("Ошибка: отсутствует DNS адрес!");
         return;
       }
       const payload = formData.subdomains
@@ -194,7 +194,7 @@ export const ManageDomainPage: FC = () => {
         : manager.createDeleteRecordBody("dns_next_resolver");
       await manager.sendTransaction(resolverAddress, payload);
       showSnackbar(
-        "Transaction confirmed by the wallet. Waiting for network confirmation.",
+        "Транзакция подтверждена кошельком. Ожидание подтверждения сетью.",
         "sent"
       );
     } catch (error: any) {
@@ -208,16 +208,16 @@ export const ManageDomainPage: FC = () => {
       {snackbar}
       <Banner
         type="section"
-        header="Manage Your DNS"
-        subheader="Easily configure your domain settings"
-        description="Enter the address of an NFT, Collection, or another DNS contract to manage its DNS records, link a TON Site, update storage, and assign wallet addresses."
+        header="Управление субдоменами"
+        subheader="Легко настройте параметры вашего домена"
+        description="Введите адрес NFT, коллекции или другого DNS контракта для управления его DNS записями, привязки TON сайта, обновления хранилища и назначения адресов кошельков."
         style={{ background: "transparent", boxShadow: "none" }}
       />
 
       <List>
         <Section
-          header={<Section.Header>DNS Address</Section.Header>}
-          footer={<Section.Footer>NFT, Collection or other DNS Contract address</Section.Footer>}
+          header={<Section.Header>DNS адрес</Section.Header>}
+          footer={<Section.Footer>Адрес NFT, коллекции или другого DNS контракта</Section.Footer>}
         >
           {isVerified ? (
             <Section>
@@ -242,12 +242,12 @@ export const ManageDomainPage: FC = () => {
             </Section>
           ) : (
             <Input
-              placeholder="Address (e.g. EQ...)"
+              placeholder="Адрес (начинается на EQ...)"
               value={resolverAddress}
               onChange={(e) => setResolverAddress(e.target.value)}
               after={
                 <Button size="s" onClick={handleCheckResolverAddress} mode="plain" loading={checkingResolver}>
-                  Check
+                  Проверить
                 </Button>
               }
             />
@@ -257,17 +257,17 @@ export const ManageDomainPage: FC = () => {
 
       {isVerified && (
         <List>
-          <Section header={<Section.Header large={false}>TON Sites</Section.Header>}>
+          <Section header={<Section.Header large={false}>TON сайты</Section.Header>}>
             <div style={{ overflow: "hidden", border: "none", paddingBottom: 0 }}>
               <Input
-                placeholder="ADNL Address"
+                placeholder="ADNL адрес"
                 value={formData.tonSite}
                 onChange={(e) => handleInputChange("tonSite", e.target.value)}
-                after={<Button size="s" mode="plain" onClick={handleSaveTonSite}>Save</Button>}
+                after={<Button size="s" mode="plain" onClick={handleSaveTonSite}>Сохранить</Button>}
               />
               <Cell
                 Component="label"
-                description="Host on TON Storage"
+                description="Разместить в TON Storage"
                 before={
                   <Checkbox
                     value="1"
@@ -279,30 +279,30 @@ export const ManageDomainPage: FC = () => {
             </div>
           </Section>
 
-          <Section header={<Section.Header large={false}>TON Storage</Section.Header>}>
+          <Section header={<Section.Header large={false}>TON хранилище</Section.Header>}>
             <Input
               placeholder="HEX"
               value={formData.tonStorage}
               onChange={(e) => handleInputChange("tonStorage", e.target.value)}
-              after={<Button size="s" mode="plain" onClick={handleSaveTonStorage}>Save</Button>}
+              after={<Button size="s" mode="plain" onClick={handleSaveTonStorage}>Сохранить</Button>}
             />
           </Section>
 
-          <Section header={<Section.Header large={false}>Wallet Address</Section.Header>}>
+          <Section header={<Section.Header large={false}>Адрес кошелька</Section.Header>}>
             <Input
-              placeholder="Address (e.g. UQ...)"
+              placeholder="Адрес (например, UQ...)"
               value={formData.walletAddress}
               onChange={(e) => handleInputChange("walletAddress", e.target.value)}
-              after={<Button size="s" mode="plain" onClick={handleSaveWalletAddress}>Save</Button>}
+              after={<Button size="s" mode="plain" onClick={handleSaveWalletAddress}>Сохранить</Button>}
             />
           </Section>
 
-          <Section header={<Section.Header large={false}>Subdomains Address</Section.Header>}>
+          <Section header={<Section.Header large={false}>Адрес поддоменов</Section.Header>}>
             <Input
-              placeholder="Address (e.g. EQ...)"
+              placeholder="Адрес (например, EQ...)"
               value={formData.subdomains}
               onChange={(e) => handleInputChange("subdomains", e.target.value)}
-              after={<Button size="s" mode="plain" onClick={handleSaveSubdomains}>Save</Button>}
+              after={<Button size="s" mode="plain" onClick={handleSaveSubdomains}>Сохранить</Button>}
             />
           </Section>
         </List>

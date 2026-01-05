@@ -37,9 +37,9 @@ export const IndexPage: FC = () => {
     <Page back={false}>
       <Banner
         type="section"
-        header="TON DNS X"
-        subheader="Simplified domain management"
-        description="Effortlessly manage your TON domains, configure DNS records, create subdomains, and organize collections—all in one place."
+        header="Домены *.gradosphera.ton"
+        subheader="Упрощённое управление доменами ДАО Градосфера"
+        description="Легко управляйте доменами, настраивайте DNS записи, создавайте поддомены и организуйте коллекции — всё в одном месте."
        style={{ background: "transparent", boxShadow: "none" }}
       />
 
@@ -51,13 +51,13 @@ export const IndexPage: FC = () => {
                 <Icon24FolderSimpleOutline color="#FFFFFF" />
               </IconWrapper>
             }
-            subtitle="Create a collection of subdomains"
+            subtitle="Создать коллекцию поддоменов"
             multiline
           >
-            Create Collection
+            Создать коллекцию
           </Cell>
           <Link to="/create-collection">
-            <ButtonCell before={<Icon24AddCircleOutline />}>Create</ButtonCell>
+            <ButtonCell before={<Icon24AddCircleOutline />}>Создать</ButtonCell>
           </Link>
         </Section>
       </List>
@@ -70,13 +70,13 @@ export const IndexPage: FC = () => {
                 <Icon24FolderSimplePlusOutline color="#FFFFFF" />
               </IconWrapper>
             }
-            subtitle="Add a subdomain to a collection"
+            subtitle="Добавить поддомен в коллекцию"
             multiline
           >
-            Add Subdomain
+            Добавить поддомен
           </Cell>
           <Link to="/add-subdomain">
-            <ButtonCell before={<Icon24AddCircleOutline />}>Add</ButtonCell>
+            <ButtonCell before={<Icon24AddCircleOutline />}>Добавить</ButtonCell>
           </Link>
         </Section>
       </List>
@@ -89,13 +89,13 @@ export const IndexPage: FC = () => {
                 <Icon24Globe color="#FFFFFF" />
               </IconWrapper>
             }
-            subtitle="Edit and manage DNS records"
+            subtitle="Редактировать и управлять DNS записями"
             multiline
           >
-            Manage DNS
+            Управление DNS
           </Cell>
           <Link to="/manage">
-            <ButtonCell before={<Icon24PenOutline />}>Manage</ButtonCell>
+            <ButtonCell before={<Icon24PenOutline />}>Управлять</ButtonCell>
           </Link>
         </Section>
       </List>

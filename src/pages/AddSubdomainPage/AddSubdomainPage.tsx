@@ -49,7 +49,7 @@ export const AddSubdomainPage: FC = () => {
 
   const handleCheckCollection = useCallback(async () => {
     if (!collectionAddress.trim()) {
-      showSnackbar("Please enter a collection address!", "error");
+      showSnackbar("Пожалуйста, введите адрес коллекции!", "error");
       return;
     }
 
@@ -59,32 +59,32 @@ export const AddSubdomainPage: FC = () => {
       await new Promise((res) => setTimeout(res, 1500));
 
       if (!fetchedCodeHash || !validCodeHashes.includes(fetchedCodeHash)) {
-        showSnackbar("Invalid collection address!", "error");
+        showSnackbar("Неправильный адрес коллекции!", "error");
         setIsCollectionValid(false);
         return;
       }
       const collection = await getNftCollection(collectionAddress);
       await new Promise((res) => setTimeout(res, 1500));
       if (!collection) {
-        showSnackbar("Invalid collection address!", "error");
+        showSnackbar("Неправильный адрес коллекции!", "error");
         setIsCollectionValid(false);
         return;
       }
 
       if (Address.parse(collection.owner_address).toString() !== Address.parse(address).toString()) {
-        showSnackbar("Collection is not owned by you!", "error");
+        showSnackbar("Коллекция вам не принадлежит!", "error");
         setIsCollectionValid(false);
         return;
       }
 
       setCollectionData({
         title: collection.title,
-        image: `https://dns.ness.su/api/ton/${collection.title.split(" ")[0].toLowerCase()}.png`,
+        image: `https://dns.gradosphera.org/api/ton/${collection.title.split(" ")[0].toLowerCase()}.png`,
       });
 
       setIsCollectionValid(true);
     } catch (error) {
-      showSnackbar("Error checking collection!", "error");
+      showSnackbar("Ошибка при проверке коллекции!", "error");
     } finally {
       setCheckingCollection(false);
     }
@@ -102,11 +102,11 @@ export const AddSubdomainPage: FC = () => {
 
   const handleCheckSubdomain = useCallback(async () => {
     if (!subdomainName.trim()) {
-      showSnackbar("Please enter a subdomain name!", "error");
+      showSnackbar("Пожалуйста, введите имя поддомена!", "error");
       return;
     }
     if (!isValidSubdomain(subdomainName)) {
-      showSnackbar("Invalid subdomain format! Use only a-z, 0-9, and '-', but not at the beginning or end.", "error");
+      showSnackbar("Неправильный формат поддомена! Используйте только a-z, 0-9 и '-', но не в начале или конце.", "error");
       return;
     }
 
@@ -116,16 +116,16 @@ export const AddSubdomainPage: FC = () => {
       const result = await getNftItem(itemAddress.toString());
 
       if (result?.title) {
-        showSnackbar("Subdomain is already taken!", "error");
+        showSnackbar("Поддомен уже занят!", "error");
         setIsSubdomainValid(false);
         return;
       }
 
       setIsSubdomainValid(true);
-      showSnackbar("Subdomain is available!", "success");
+      showSnackbar("Поддомен доступен!", "success");
     } catch (error) {
         console.log(error);
-      showSnackbar("Error checking subdomain!", "error");
+      showSnackbar("Ошибка при проверке поддомена!", "error");
     } finally {
       setCheckingSubdomain(false);
     }
@@ -133,24 +133,24 @@ export const AddSubdomainPage: FC = () => {
 
   const handleDeploySubdomain = useCallback(async () => {
     if (!wallet) {
-      showSnackbar("Wallet not connected!", "error");
+      showSnackbar("Кошелёк не подключён!", "error");
       return;
     }
     if (!isCollectionValid || !isSubdomainValid) {
-      showSnackbar("Invalid collection or subdomain!", "error");
+      showSnackbar("Неправильная коллекция или поддомен!", "error");
       return;
     }
 
     setLoading(true);
     try {
       await subdomain.sendTransaction(collectionAddress, subdomainName);
-      showSnackbar("Transaction confirmed by the wallet. Waiting for network confirmation.", "success");
+      showSnackbar("Транзакция подтверждена кошельком. Ожидание подтверждения сетью.", "success");
 
       setSubdomainName("");
       setIsSubdomainValid(false);
       setImageLoaded(false);
     } catch (error) {
-      showSnackbar("Failed to deploy subdomain!", "error");
+      showSnackbar("Не удалось развернуть поддомен!", "error");
     } finally {
       setLoading(false);
     }
@@ -165,7 +165,7 @@ export const AddSubdomainPage: FC = () => {
   const subdomainPreview = useMemo(() => {
     if (!collectionData || !subdomainName) return null;
     return {
-      image: `https://dns.ness.su/api/ton/${subdomainName}/${collectionData.title.split(" ")[0].toLowerCase()}.png`,
+      image: `https://dns.gradosphera.org/api/ton/${subdomainName}/${collectionData.title.split(" ")[0].toLowerCase()}.png`,
     };
   }, [subdomainName, collectionData]);
 
@@ -175,17 +175,17 @@ export const AddSubdomainPage: FC = () => {
 
       <Banner
         type="section"
-        header="Add a Subdomain"
-        subheader="Link a new subdomain to your collection"
-        description="Enter your collection address, check availability, and deploy your unique subdomain."
+        header="Добавить поддомен"
+        subheader="Привязать новый поддомен к вашей коллекции"
+        description="Введите адрес вашей коллекции, проверьте доступность и разверните свой уникальный поддомен."
         style={{ background: "transparent", boxShadow: "none" }}
       />
 
       <List>
-        <Section header={<Section.Header>Collection Address</Section.Header>}>
+        <Section header={<Section.Header>Адрес коллекции</Section.Header>}>
           {isCollectionValid && collectionData ? (
             <Cell
-              subtitle="NFT Collection"
+              subtitle="NFT коллекция"
               before={collectionData.image ? <Image src={collectionData.image} /> : null}
               after={
                 <IconButton
@@ -205,12 +205,12 @@ export const AddSubdomainPage: FC = () => {
             </Cell>
           ) : (
             <Input
-              placeholder="Address (e.g. EQ...)"
+              placeholder="Адрес (например, EQ...)"
               value={collectionAddress}
               onChange={(e) => setCollectionAddress(e.target.value)}
               after={
                 <Button size="s" onClick={handleCheckCollection} mode="plain" loading={checkingCollection}>
-                  Check
+                  Проверить
                 </Button>
               }
             />
@@ -220,14 +220,14 @@ export const AddSubdomainPage: FC = () => {
 
       {isCollectionValid && !isSubdomainValid && (
         <List>
-          <Section header={<Section.Header>Subdomain Name</Section.Header>}>
+          <Section header={<Section.Header>Имя поддомена</Section.Header>}>
             <Input
-              placeholder="Subdomain name"
+              placeholder="Имя поддомена"
               value={subdomainName}
               onChange={(e) => setSubdomainName(e.target.value.toLowerCase())}
               after={
                 <Button size="s" onClick={handleCheckSubdomain} mode="plain" loading={checkingSubdomain}>
-                  Check
+                  Проверить
                 </Button>
               }
             />
@@ -237,7 +237,7 @@ export const AddSubdomainPage: FC = () => {
 
       {isSubdomainValid && subdomainPreview && (
         <List>
-          <Section header={<Section.Header>Subdomain Preview</Section.Header>}>
+          <Section header={<Section.Header>Предпросмотр поддомена</Section.Header>}>
             <Card style={{ display: imageLoaded ? "block" : "none", position: "relative", overflow: "hidden" }}>
               <IconButton
                 mode="plain"
@@ -276,7 +276,7 @@ export const AddSubdomainPage: FC = () => {
           </Section>
 
           <Button style={{ display: imageLoaded ? "block" : "none"}} onClick={handleDeploySubdomain} loading={loading} stretched size="l">
-            Deploy Subdomain
+            Развернуть поддомен
           </Button>
         </List>
       )}
