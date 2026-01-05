@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.1",
   "type": "module",
-  "homepage": "https://github.com/gradosphera/tma-dns",
+  "homepage": "https://gradosphera.github.io/tma-dns",
   "scripts": {
     "deploy": "gh-pages -d dist",
     "dev": "vite",
