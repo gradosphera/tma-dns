@@ -79,7 +79,7 @@ export const AddSubdomainPage: FC = () => {
 
       setCollectionData({
         title: collection.title,
-        image: `https://dns.gradosphera.org/api/ton/${collection.title.split(" ")[0].toLowerCase()}.png`,
+        image: `http://95.163.230.73:8001/api/ton/${collection.title.split(" ")[0].toLowerCase()}.png`,
       });
 
       setIsCollectionValid(true);
@@ -165,7 +165,7 @@ export const AddSubdomainPage: FC = () => {
   const subdomainPreview = useMemo(() => {
     if (!collectionData || !subdomainName) return null;
     return {
-      image: `https://dns.gradosphera.org/api/ton/${subdomainName}/${collectionData.title.split(" ")[0].toLowerCase()}.png`,
+      image: `http://95.163.230.73:8001/api/ton/${subdomainName}/${collectionData.title.split(" ")[0].toLowerCase()}.png`,
     };
   }, [subdomainName, collectionData]);
 

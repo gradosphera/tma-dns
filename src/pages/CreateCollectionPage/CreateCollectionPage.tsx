@@ -89,7 +89,7 @@ export const CreateCollectionPage: FC = () => {
     return {
       title: `DNS домены ${formatDomainName(domainData.title)} DNS Domains`,
       subtitle: `Домены *.${domainData.title.toLowerCase()}.ton`,
-      image: `https://dns.gradosphera.org/api/ton/${domainData.title.toLowerCase()}.png`,
+      image: `http://95.163.230.73:8001/api/ton/${domainData.title.toLowerCase()}.png`,
     };
   }, [domainData]);
 

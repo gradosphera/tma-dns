@@ -14,11 +14,11 @@ const Footer = () => (
         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
           <img src={gradospheraFooterSvg} alt="TON Logo" style={{ width: "24px", height: "24px" }} />
           <Text style={{ fontSize: "12px", color: "var(--tg-theme-hint-color)", fontWeight: "bold" }}>
-            ДАО Градосфера
+            Домены
           </Text>
         </div>
         <Text style={{ fontSize: "12px", color: "var(--tg-theme-hint-color)" }}>
-          {new Date().getFullYear()} КГОО Градосфера
+          {new Date().getFullYear()} ДАО Градосфера
         </Text>
       </div>
     </List>

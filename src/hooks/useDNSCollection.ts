@@ -162,9 +162,9 @@ export const useDNSCollection = () => {
 
     const content: CollectionContent = {
       name: `DNS Домены ${formattedDomain}`,
-      image: `https://dns.gradosphera.org/api/ton/${domain.toLowerCase()}.png`,
+      image: `http://95.163.230.73:8001/api/ton/${domain.toLowerCase()}.png`,
       description: `Домены *.${domain.toLowerCase()}.ton`,
-      prefix_uri: "https://dns.gradosphera.org/api/ton/",
+      prefix_uri: "http://95.163.230.73:8001/api/ton",
     };
 
     const deployPayload = beginCell()
