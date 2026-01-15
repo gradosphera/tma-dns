@@ -1,6 +1,6 @@
 import { List, Text } from "@telegram-apps/telegram-ui";
 
-import tonFooterSvg from "./ton.svg";
+import gradospheraFooterSvg from "./gradosphera.svg";
 
 const Footer = () => (
   <div style={{ position: "relative", marginTop: "auto" }}>
@@ -12,16 +12,13 @@ const Footer = () => (
     >
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+          <img src={gradospheraFooterSvg} alt="TON Logo" style={{ width: "24px", height: "24px" }} />
           <Text style={{ fontSize: "12px", color: "var(--tg-theme-hint-color)", fontWeight: "bold" }}>
-            BASED ON
-          </Text>
-          <img src={tonFooterSvg} alt="TON Logo" style={{ width: "24px", height: "24px" }} />
-          <Text style={{ fontSize: "12px", color: "var(--tg-theme-hint-color)", fontWeight: "bold" }}>
-            TON
+            Домены
           </Text>
         </div>
         <Text style={{ fontSize: "12px", color: "var(--tg-theme-hint-color)" }}>
-          {new Date().getFullYear()} © TON DNS X
+          {new Date().getFullYear()} ДАО Градосфера
         </Text>
       </div>
     </List>

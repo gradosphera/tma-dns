@@ -30,7 +30,7 @@ export const ShowSnackbar: FC<SnackbarProps> = ({ message, type = "success", onC
         </IconButton>
       }
     >
-      {type === "success" ? "Success" : type === "error" ? "An error occurred" : "Transaction sent!"}
+      {type === "success" ? "Успешно" : type === "error" ? "Произошла ошибка" : "Транзакция отправлена!"}
     </Snackbar>
   );
 };

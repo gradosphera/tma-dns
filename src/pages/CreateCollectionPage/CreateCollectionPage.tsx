@@ -53,7 +53,7 @@ export const CreateCollectionPage: FC = () => {
 
   const checkDomainOwnership = useCallback(async () => {
     if (!domainAddress.trim()) {
-      showSnackbar("Please enter a DNS Address!", "error");
+      showSnackbar("Пожалуйста, введите DNS адрес!", "error");
       return;
     }
 
@@ -62,15 +62,15 @@ export const CreateCollectionPage: FC = () => {
       const result = await getNftDomainItem(domainAddress, TON_DNS_COLLECTION_ADDRESS);
 
       if (!result?.title) {
-        showSnackbar("Incorrect Domain Address!", "error");
+        showSnackbar("Неправильный адрес домена!", "error");
         return;
       }
       if (!result?.owner_address) {
-        showSnackbar("Can't find Domain owner Address!", "error");
+        showSnackbar("Не удалось найти адрес владельца домена!", "error");
         return;
       }
       if (Address.parse(result.owner_address).toString() !== Address.parse(address).toString()) {
-        showSnackbar("Domain Address doesn't belong to you!", "error");
+        showSnackbar("Адрес домена вам не принадлежит!", "error");
         return;
       }
 
@@ -78,7 +78,7 @@ export const CreateCollectionPage: FC = () => {
       setIsVerified(true);
     } catch (error) {
       console.error(error);
-      showSnackbar("Error checking domain!", "error");
+      showSnackbar("Ошибка при проверке домена!", "error");
     } finally {
       setCheckingDomain(false);
     }
@@ -87,34 +87,34 @@ export const CreateCollectionPage: FC = () => {
   const collectionPreview = useMemo(() => {
     if (!domainData) return null;
     return {
-      title: `${formatDomainName(domainData.title)} DNS Domains`,
-      subtitle: `*.${domainData.title.toLowerCase()}.ton domains`,
-      image: `https://dns.ness.su/api/ton/${domainData.title.toLowerCase()}.png`,
+      title: `DNS домены ${formatDomainName(domainData.title)} DNS Domains`,
+      subtitle: `Домены *.${domainData.title.toLowerCase()}.ton`,
+      image: `http://95.163.230.73:8001/api/ton/${domainData.title.toLowerCase()}.png`,
     };
   }, [domainData]);
 
   const deployCollection = useCallback(async () => {
     if (!wallet) {
-      showSnackbar("Wallet not connected!", "error");
+      showSnackbar("Кошелёк не подключён!", "error");
       return;
     }
 
     if (!domainAddress.trim() || !domainData?.title) {
-      showSnackbar("Please enter a valid Domain Address!", "error");
+      showSnackbar("Пожалуйста, введите корректный адрес домена!", "error");
       return;
     }
 
     setLoading(true);
     try {
       await collection.deployCollection(address, ROYALTY_ADDRESS, domainData.title, domainAddress);
-      showSnackbar("Transaction confirmed by the wallet. Waiting for network confirmation.", "success");
+      showSnackbar("Транзакция подтверждена кошельком. Ожидание подтверждения сетью.", "success");
 
       setIsVerified(false);
       setDomainData(null);
       setDomainAddress("");
     } catch (error) {
       console.error(error);
-      showSnackbar("Failed to deploy collection!", "error");
+      showSnackbar("Не удалось развернуть коллекцию!", "error");
     } finally {
       setLoading(false);
     }
@@ -125,16 +125,16 @@ export const CreateCollectionPage: FC = () => {
       {snackbar}
       <Banner
         type="section"
-        header="Create Your NFT Collection"
-        subheader="Turn your domain into an NFT Collection"
-        description="Verify domain ownership and deploy a unique NFT collection on TON. Manage your subdomains with ease."
+        header="Создайте свою NFT коллекцию"
+        subheader="Превратите свой домен в NFT коллекцию"
+        description="Подтвердите владение доменом и разверните уникальную NFT коллекцию на TON. Легко управляйте своими поддоменами."
         style={{ background: "transparent", boxShadow: "none" }}
        />
 
       <List>
         <Section
-          header={<Section.Header>Domain Address</Section.Header>}
-          footer={<Section.Footer>NFT domain address for your collection.</Section.Footer>}
+          header={<Section.Header>Адрес домена</Section.Header>}
+          footer={<Section.Footer>Адрес NFT домена для вашей коллекции.</Section.Footer>}
         >
           {isVerified && domainData ? (
             <Cell
@@ -158,12 +158,12 @@ export const CreateCollectionPage: FC = () => {
             </Cell>
           ) : (
             <Input
-              placeholder="Address (e.g. EQ...)"
+              placeholder="Адрес (например, EQ...)"
               value={domainAddress}
               onChange={(e) => setDomainAddress(e.target.value)}
               after={
                 <Button size="s" onClick={checkDomainOwnership} mode="plain" loading={checkingDomain}>
-                  Check
+                  Проверить
                 </Button>
               }
             />
@@ -172,7 +172,7 @@ export const CreateCollectionPage: FC = () => {
 
         {collectionPreview && (
           <>
-            <Section header={<Section.Header>Collection Preview</Section.Header>}>
+            <Section header={<Section.Header>Предпросмотр коллекции</Section.Header>}>
               <Card>
                 <img
                   src={collectionPreview.image}
@@ -192,7 +192,7 @@ export const CreateCollectionPage: FC = () => {
             </Section>
 
             <Button  style={{ display: imageLoaded ? "block" : "none"}} onClick={deployCollection} loading={loading} stretched size="l">
-              Deploy Collection
+              Развернуть коллекцию
             </Button>
           </>
         )}

@@ -23,8 +23,8 @@ export function EnvUnsupported() {
       platform={['macos', 'ios'].includes(platform) ? 'ios' : 'base'}
     >
       <Placeholder
-        header="Oops"
-        description="You are using too old Telegram client to run this application"
+        header="Упс"
+        description="Вы используете слишком старую версию Telegram для запуска этого приложения"
       >
         <img
           alt="Telegram sticker"

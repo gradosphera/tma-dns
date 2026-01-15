@@ -1,1 +1,1 @@
-# TON DNS Telegram Mini App
+# Субдомены ДАО Градосфера

@@ -5,7 +5,7 @@ import mkcert from 'vite-plugin-mkcert';
 import { nodePolyfills } from 'vite-plugin-node-polyfills'
 
 export default defineConfig({
-  base: '/tma',
+  base: '/tma-dns/',
   plugins: [
     react(),
     tsconfigPaths(),
