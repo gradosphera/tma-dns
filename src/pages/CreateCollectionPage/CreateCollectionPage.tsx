@@ -87,7 +87,7 @@ export const CreateCollectionPage: FC = () => {
   const collectionPreview = useMemo(() => {
     if (!domainData) return null;
     return {
-      title: `DNS домены ${formatDomainName(domainData.title)} DNS Domains`,
+      title: `DNS домены ${formatDomainName(domainData.title)}`,
       subtitle: `Домены *.${domainData.title.toLowerCase()}.ton`,
       image: `http://95.163.230.73:8001/api/ton/${domainData.title.toLowerCase()}.png`,
     };
